@@ -1,0 +1,190 @@
+{
+  "project_info": {
+    "project_number": "636349626173",
+    "project_id": "beepme-1b37a",
+    "storage_bucket": "beepme-1b37a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:636349626173:android:7f48bc449056fb2fb77754",
+        "android_client_info": {
+          "package_name": "com.BeepMe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "636349626173-d3n6k16fogd8oqic0rk4b2qfddgos5rl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAaq-xShXkGllQj6G5hAgNB6C1b6P2jI34"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "636349626173-d3n6k16fogd8oqic0rk4b2qfddgos5rl.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "636349626173-34b2voahbsbs95286mvic5g28vn6oor1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ixApp.BeepMe"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:636349626173:android:c75d782aa7c2c329b77754",
+        "android_client_info": {
+          "package_name": "com.example.beep_me_ix"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "636349626173-d3n6k16fogd8oqic0rk4b2qfddgos5rl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAaq-xShXkGllQj6G5hAgNB6C1b6P2jI34"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "636349626173-d3n6k16fogd8oqic0rk4b2qfddgos5rl.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "636349626173-34b2voahbsbs95286mvic5g28vn6oor1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ixApp.BeepMe"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:636349626173:android:cea2fd551bc0c0e7b77754",
+        "android_client_info": {
+          "package_name": "com.ixApp.BeepMe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "636349626173-d3n6k16fogd8oqic0rk4b2qfddgos5rl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAaq-xShXkGllQj6G5hAgNB6C1b6P2jI34"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "636349626173-d3n6k16fogd8oqic0rk4b2qfddgos5rl.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "636349626173-34b2voahbsbs95286mvic5g28vn6oor1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ixApp.BeepMe"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:636349626173:android:01361fc7849c4a5eb77754",
+        "android_client_info": {
+          "package_name": "com.ixApp.beep_me_ix"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "636349626173-d3n6k16fogd8oqic0rk4b2qfddgos5rl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAaq-xShXkGllQj6G5hAgNB6C1b6P2jI34"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "636349626173-d3n6k16fogd8oqic0rk4b2qfddgos5rl.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "636349626173-34b2voahbsbs95286mvic5g28vn6oor1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ixApp.BeepMe"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:636349626173:android:dce2bf96fdb76b98b77754",
+        "android_client_info": {
+          "package_name": "com.ixApps.beep_me"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "636349626173-d3n6k16fogd8oqic0rk4b2qfddgos5rl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAaq-xShXkGllQj6G5hAgNB6C1b6P2jI34"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "636349626173-d3n6k16fogd8oqic0rk4b2qfddgos5rl.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "636349626173-34b2voahbsbs95286mvic5g28vn6oor1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ixApp.BeepMe"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
