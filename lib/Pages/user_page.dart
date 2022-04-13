@@ -46,20 +46,42 @@ class _UserPageState extends State<UserPage> {
     return '';
   }
 
+  showAlertDialog() {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Revert'),
+            content: Text('You have reverted'),
+            actions: <Widget>[
+              Row(
+                children: [
+                  FlatButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => (IntermediatePage())));
+                        /*   Navigator.of(context)
+                            .popUntil((route) => route.isFirst);*/
+                      },
+                      child: Text('OK')),
+                ],
+              )
+            ],
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     // getStoreShared();
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
-        title: FlatButton.icon(
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.white,
-          ),
-          label: Text(
-            '',
-          ),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
           onPressed: () async {
             Navigator.pushReplacement(context,
                 MaterialPageRoute(builder: (context) => (IntermediatePage())));
@@ -150,11 +172,11 @@ class _UserPageState extends State<UserPage> {
                         await SharedPreferences.getInstance();
                     pref.setString("ImpersonateClientName", "");
                     pref.setString("ImpersonateClientValue", "");
-
-                    Navigator.pushReplacement(
+                    showAlertDialog();
+                    /* Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => (IntermediatePage())));
+                            builder: (context) => (IntermediatePage())));*/
                   },
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(80.0)),

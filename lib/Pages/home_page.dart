@@ -39,6 +39,7 @@ class _HomePageState extends State<HomePage> {
   int countVehicle = 0;
   int? client = 0;
   int _count = 20;
+
   // late FirebaseMessaging firebaseMessaging;
 
   getPendingVehicleNumber(int ClientId) async {
@@ -104,7 +105,6 @@ class _HomePageState extends State<HomePage> {
               jsonDecode(dataPending)['result']['imagesRequired'] ?? 0;
         });
       }
-
       print('unable to load vehicles');
     }
   }
@@ -237,6 +237,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final query = MediaQuery.of(context);
     //  refreshPageState();
     getSharedPrefValues();
     getTokenForMessage();
@@ -358,58 +359,61 @@ class _HomePageState extends State<HomePage> {
 
                         //child: ListTile(
 
-                        child: Container(
-                            height: 130,
-                            width: MediaQuery.of(context).size.width,
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 10.0, vertical: 10.0),
-                            child: Column(
-                              children: <Widget>[
-                                Row(
-                                  children: [
-                                    const Padding(
-                                      padding: EdgeInsets.all(8.0),
-                                      child: Icon(Icons.bookmark_add_rounded),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Text(
-                                        "Spec IDs Required",
-                                        textAlign: TextAlign.start,
-                                        style: TextStyle(
-                                          color: componentColor,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 16,
+                        child: MediaQuery(
+                          data: query.copyWith(textScaleFactor: 1.25),
+                          child: Container(
+                              height: 155,
+                              width: MediaQuery.of(context).size.width,
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 10.0, vertical: 10.0),
+                              child: Column(
+                                children: <Widget>[
+                                  Row(
+                                    children: [
+                                      const Padding(
+                                        padding: EdgeInsets.all(8.0),
+                                        child: Icon(Icons.bookmark_add_rounded),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Text(
+                                          "Spec IDs Required",
+                                          textAlign: TextAlign.start,
+                                          style: TextStyle(
+                                            color: componentColor,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 16,
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Text(
-                                        pendingVehicle.toString(),
-                                        textAlign: TextAlign.start,
-                                        style: const TextStyle(
-                                          color: Colors.red,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 16,
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Text(
+                                          pendingVehicle.toString(),
+                                          textAlign: TextAlign.start,
+                                          style: const TextStyle(
+                                            color: Colors.red,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 16,
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                const Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Text(
-                                    "You use MM codes. Auto Trader sometimes has multiple spec IDs per MM code. Please select spec IDs so that these adverts can be activated for you.",
-                                    textAlign: TextAlign.start,
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 13.0,
+                                    ],
+                                  ),
+                                  const Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text(
+                                      "You use MM codes. Auto Trader sometimes has multiple spec IDs per MM code. Please select spec IDs so that these adverts can be activated for you.",
+                                      textAlign: TextAlign.start,
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 13.0,
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
-                            )),
+                                ],
+                              )),
+                        ),
                       ),
                     ),
                   ),
@@ -436,58 +440,61 @@ class _HomePageState extends State<HomePage> {
 
                       //child: ListTile(
                       //    onTap: (){},
-                      child: Container(
-                          height: 130,
-                          width: MediaQuery.of(context).size.width,
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 10.0, vertical: 10.0),
-                          child: Column(
-                            children: <Widget>[
-                              Row(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Icon(Icons.camera_alt_outlined),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text(
-                                      "Missing Vehicle Photos",
-                                      textAlign: TextAlign.start,
-                                      style: TextStyle(
-                                        color: componentColor,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16,
+                      child: MediaQuery(
+                        data: query.copyWith(textScaleFactor: 1.25),
+                        child: Container(
+                            height: 155,
+                            width: MediaQuery.of(context).size.width,
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 10.0, vertical: 10.0),
+                            child: Column(
+                              children: <Widget>[
+                                Row(
+                                  children: [
+                                    const Padding(
+                                      padding: EdgeInsets.all(8.0),
+                                      child: Icon(Icons.camera_alt_outlined),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(
+                                        "Missing Vehicle Photos",
+                                        textAlign: TextAlign.start,
+                                        style: TextStyle(
+                                          color: componentColor,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text(
-                                      countVehicle.toString(),
-                                      textAlign: TextAlign.start,
-                                      style: const TextStyle(
-                                        color: Colors.red,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16,
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(
+                                        countVehicle.toString(),
+                                        textAlign: TextAlign.start,
+                                        style: const TextStyle(
+                                          color: Colors.red,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                              Padding(
-                                padding: EdgeInsets.all(8.0),
-                                child: Text(
-                                  "These vehicles have less than $pendingImagesREeq photo/s, which is the minimum prescribed by you for your business.",
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 13.0,
+                                  ],
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: Text(
+                                    "These vehicles have less than $pendingImagesREeq photo/s, which is the minimum prescribed by you for your business.",
+                                    textAlign: TextAlign.start,
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 13.0,
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ],
-                          )),
+                              ],
+                            )),
+                      ),
                     ),
                   ),
                 ),

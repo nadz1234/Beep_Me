@@ -16,7 +16,7 @@ class VehicleListPage extends StatefulWidget {
 
 class _VehicleListPageState extends State<VehicleListPage> {
   String data = '';
-  var vehicleListLength;
+  List vehicleListLength = [];
   int? client = 0;
   @override
   void initState() {
@@ -45,7 +45,7 @@ class _VehicleListPageState extends State<VehicleListPage> {
       data = res.body;
       setState(() {
         vehicleListLength = jsonDecode(data)['result']['list'];
-        print(vehicleListLength.length);
+        //print(vehicleListLength.length);
       });
     } else
       throw Exception("Unable to get vehicle list");
@@ -61,6 +61,7 @@ class _VehicleListPageState extends State<VehicleListPage> {
 
   @override
   Widget build(BuildContext context) {
+    final query = MediaQuery.of(context);
     getSharedPrefValues();
     return Scaffold(
       backgroundColor: backgroundColor,
@@ -68,83 +69,101 @@ class _VehicleListPageState extends State<VehicleListPage> {
         title: Text('Vehicle List'),
         backgroundColor: componentColor,
       ),
-      body: ListView.builder(
-          scrollDirection: Axis.vertical,
-          shrinkWrap: true,
-          itemCount: vehicleListLength == null ? 0 : vehicleListLength.length,
-          itemBuilder: (BuildContext context, int index) {
-            List<String> imgList = jsonDecode(data)['result']['list'][index]
-                    ['image']
-                .toString()
-                .split(",");
+      body: vehicleListLength.length == 0
+          ? Container(
+              child: Center(
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const <Widget>[
+                  CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                        Color.fromARGB(255, 31, 134, 112)),
+                    backgroundColor: Colors.grey,
+                  ),
+                ])))
+          : ListView.builder(
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
+              itemCount:
+                  vehicleListLength == null ? 0 : vehicleListLength.length,
+              itemBuilder: (BuildContext context, int index) {
+                List<String> imgList = jsonDecode(data)['result']['list'][index]
+                        ['image']
+                    .toString()
+                    .split(",");
 
-            var vehicleSpecId =
-                jsonDecode(data)['result']['list'][index]['vehicleStockID'];
+                var vehicleSpecId =
+                    jsonDecode(data)['result']['list'][index]['vehicleStockID'];
 
-            return Padding(
-              padding: const EdgeInsets.all(2.0),
-              child: InkWell(
-                onTap: () async {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              (SelectSpecPage(vehicleSpecId, imgList))));
-                },
-                child: Card(
-                  child: Container(
-                    width: 100.0,
-                    height: 100.0,
-                    child: Row(
-                      children: [
-                        Image.network(
-                          imgList.first,
-                          fit: BoxFit.fill,
-                          width: 100,
-                          height: 450,
-                          alignment: Alignment.center,
-                        ),
-                        Column(
-                          children: [
-                            Container(
-                              width: 260,
-                              child: Padding(
-                                padding: const EdgeInsets.fromLTRB(8, 10, 0, 0),
-                                child: Text(
-                                  jsonDecode(data)['result']['list'][index]
-                                      ['friendlyName'],
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: componentColor),
-                                  overflow: TextOverflow.fade,
-                                  maxLines: 2,
-                                ),
+                return Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: InkWell(
+                    onTap: () async {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  (SelectSpecPage(vehicleSpecId, imgList))));
+                    },
+                    child: Card(
+                      child: Container(
+                        width: 100.0,
+                        height: 100.0,
+                        child: MediaQuery(
+                          data: query.copyWith(textScaleFactor: 1.25),
+                          child: Row(
+                            children: [
+                              Image.network(
+                                imgList.first,
+                                fit: BoxFit.fill,
+                                width: 100,
+                                height: 450,
+                                alignment: Alignment.center,
                               ),
-                            ),
-                            Container(
-                              width: 260,
-                              child: Padding(
-                                padding: const EdgeInsets.fromLTRB(8, 10, 0, 0),
-                                child: Text(
-                                  jsonDecode(data)['result']['list'][index]
-                                      ['stockCode'],
-                                  style: TextStyle(
-                                      // fontWeight: FontWeight.bold,
-                                      color: componentColor),
-                                  overflow: TextOverflow.fade,
-                                  maxLines: 2,
-                                ),
+                              Column(
+                                children: [
+                                  Container(
+                                    width: 260,
+                                    child: Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          8, 10, 0, 0),
+                                      child: Text(
+                                        jsonDecode(data)['result']['list']
+                                            [index]['friendlyName'],
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: componentColor),
+                                        overflow: TextOverflow.fade,
+                                        maxLines: 2,
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 260,
+                                    child: Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          8, 10, 0, 0),
+                                      child: Text(
+                                        jsonDecode(data)['result']['list']
+                                            [index]['stockCode'],
+                                        style: TextStyle(
+                                            // fontWeight: FontWeight.bold,
+                                            color: componentColor),
+                                        overflow: TextOverflow.fade,
+                                        maxLines: 2,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ],
+                      ),
                     ),
                   ),
-                ),
-              ),
-            );
-          }),
+                );
+              }),
     );
   }
 }

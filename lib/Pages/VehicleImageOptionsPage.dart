@@ -138,7 +138,8 @@ class _VehicleImageOptionsState extends State<VehicleImageOptions> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => (OrderImagePriority(
-                                    widget.vehicleSpecId))));
+                                    widget.vehicleSpecId,
+                                    widget.numVehicles))));
                       },
                       child: Text('Yes')),
                 ],
@@ -240,6 +241,7 @@ class _VehicleImageOptionsState extends State<VehicleImageOptions> {
 
   @override
   Widget build(BuildContext context) {
+    final query = MediaQuery.of(context);
     getSharedPrefValues();
 
     return Scaffold(
@@ -263,8 +265,8 @@ class _VehicleImageOptionsState extends State<VehicleImageOptions> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) =>
-                              (OrderImagePriority(widget.vehicleSpecId))));
+                          builder: (context) => (OrderImagePriority(
+                              widget.vehicleSpecId, widget.numVehicles))));
                 },
               ),
             ],
@@ -278,300 +280,304 @@ class _VehicleImageOptionsState extends State<VehicleImageOptions> {
             child: Card(
               elevation: 5.0,
               color: cardColor,
-              child: Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Row(
-                      children: [
-                        /*Padding(
-                          padding: const EdgeInsets.fromLTRB(4, 4, 0, 18),
-                          child: Text(
-                            year.toString() + " ",
-                            textAlign: TextAlign.start,
-                            style: TextStyle(
-                              color: componentColor,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15.0,
+              child: MediaQuery(
+                data: query.copyWith(textScaleFactor: 1.25),
+                child: Container(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Row(
+                        children: [
+                          /*Padding(
+                            padding: const EdgeInsets.fromLTRB(4, 4, 0, 18),
+                            child: Text(
+                              year.toString() + " ",
+                              textAlign: TextAlign.start,
+                              style: TextStyle(
+                                color: componentColor,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15.0,
+                              ),
                             ),
-                          ),
-                        ),*/
-                        Padding(
-                          padding: const EdgeInsets.all(6.0),
-                          child: Column(
-                            children: [
-                              Row(
-                                children: [
-                                  Container(
-                                    width: 300,
-                                    child: Text(
-                                      year.toString() + " " + friendlyName,
-                                      overflow: TextOverflow.fade,
-                                      textAlign: TextAlign.start,
-                                      style: TextStyle(
-                                        color: componentColor,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 15.0,
+                          ),*/
+                          Padding(
+                            padding: const EdgeInsets.all(6.0),
+                            child: Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    Container(
+                                      width: 300,
+                                      child: Text(
+                                        year.toString() + " " + friendlyName,
+                                        overflow: TextOverflow.fade,
+                                        textAlign: TextAlign.start,
+                                        style: TextStyle(
+                                          color: componentColor,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 15.0,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(8, 10, 0, 0),
-                      child: Text(
-                        "R " + price.toString(),
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                          color: componentColor,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15.0,
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(8, 8, 0, 0),
-                      child: Text(
-                        "Reg: " + reg.toString(),
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                          color: Colors.black,
-                          // fontWeight: FontWeight.bold,
-                          fontSize: 15.0,
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(8, 1, 0, 0),
-                      child: Text(
-                        "Vin: " + vin.toString(),
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                          color: Colors.black,
-                          // fontWeight: FontWeight.bold,
-                          fontSize: 15.0,
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(8, 1, 0, 0),
-                      child: Text(
-                        "Stock #" + stockCode,
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                          color: Colors.black,
-                          // fontWeight: FontWeight.bold,
-                          fontSize: 15.0,
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(8, 1, 0, 0),
-                      child: Row(
-                        children: [
-                          Text(
-                            "Photos: " + widget.missingImage.toString(),
-                            textAlign: TextAlign.start,
-                            style: TextStyle(
-                              color: Colors.black,
-                              //fontWeight: FontWeight.bold,
-                              fontSize: 15.0,
-                            ),
-                          ),
-                          Text(
-                            " | Need " + imagesneed.toString(),
-                            textAlign: TextAlign.start,
-                            style: TextStyle(
-                              color: Color.fromARGB(255, 170, 55, 47),
-                              //   fontWeight: FontWeight.bold,
-                              fontSize: 15.0,
+                                  ],
+                                ),
+                              ],
                             ),
                           ),
                         ],
                       ),
-                    ),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.fromLTRB(8, 6, 0, 0),
-                      child: Text(
-                        "Existing Vehicle Photos",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15.0,
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(8, 10, 0, 0),
+                        child: Text(
+                          "R " + price.toString(),
+                          textAlign: TextAlign.start,
+                          style: TextStyle(
+                            color: componentColor,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15.0,
+                          ),
                         ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    GridView.builder(
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 3),
-                        scrollDirection: Axis.vertical,
-                        shrinkWrap: true,
-                        itemCount: _currentDbImage.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return _currentDbImage.length == 0
-                              ? Container(
-                                  child: Center(
-                                      child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: <Widget>[
-                                      CircularProgressIndicator(
-                                        valueColor:
-                                            AlwaysStoppedAnimation<Color>(
-                                                Colors.red),
-                                        backgroundColor: Colors.grey,
-                                      ),
-                                    ])))
-                              : Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: GestureDetector(
-                                    onTap: () => {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  (EnlargeImage(
-                                                    _currentDbImage[index]
-                                                        .blobUrl,
-                                                  )))),
-                                    },
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: GridTile(
-                                          child: Hero(
-                                        tag: 'vehimg',
-                                        child: Image.network(
-                                          _currentDbImage[index].blobUrl,
-                                          fit: BoxFit.cover,
-                                          height: 100,
-                                          width: 100,
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(8, 8, 0, 0),
+                        child: Text(
+                          "Reg: " + reg.toString(),
+                          textAlign: TextAlign.start,
+                          style: TextStyle(
+                            color: Colors.black,
+                            // fontWeight: FontWeight.bold,
+                            fontSize: 15.0,
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(8, 1, 0, 0),
+                        child: Text(
+                          "Vin: " + vin.toString(),
+                          textAlign: TextAlign.start,
+                          style: TextStyle(
+                            color: Colors.black,
+                            // fontWeight: FontWeight.bold,
+                            fontSize: 15.0,
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(8, 1, 0, 0),
+                        child: Text(
+                          "Stock #" + stockCode,
+                          textAlign: TextAlign.start,
+                          style: TextStyle(
+                            color: Colors.black,
+                            // fontWeight: FontWeight.bold,
+                            fontSize: 15.0,
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(8, 1, 0, 0),
+                        child: Row(
+                          children: [
+                            Text(
+                              "Photos: " + widget.missingImage.toString(),
+                              textAlign: TextAlign.start,
+                              style: TextStyle(
+                                color: Colors.black,
+                                //fontWeight: FontWeight.bold,
+                                fontSize: 15.0,
+                              ),
+                            ),
+                            Text(
+                              " | Need " + imagesneed.toString(),
+                              textAlign: TextAlign.start,
+                              style: TextStyle(
+                                color: Color.fromARGB(255, 170, 55, 47),
+                                //   fontWeight: FontWeight.bold,
+                                fontSize: 15.0,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.fromLTRB(8, 6, 0, 0),
+                        child: Text(
+                          "Existing Vehicle Photos",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15.0,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      GridView.builder(
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 3),
+                          scrollDirection: Axis.vertical,
+                          shrinkWrap: true,
+                          itemCount: _currentDbImage.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return _currentDbImage.length == 0
+                                ? Container(
+                                    child: Center(
+                                        child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: <Widget>[
+                                        CircularProgressIndicator(
+                                          valueColor:
+                                              AlwaysStoppedAnimation<Color>(
+                                                  Colors.red),
+                                          backgroundColor: Colors.grey,
                                         ),
-                                      )),
+                                      ])))
+                                : Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: GestureDetector(
+                                      onTap: () => {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    (EnlargeImage(
+                                                      _currentDbImage[index]
+                                                          .blobUrl,
+                                                    )))),
+                                      },
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: GridTile(
+                                            child: Hero(
+                                          tag: 'vehimg',
+                                          child: Image.network(
+                                            _currentDbImage[index].blobUrl,
+                                            fit: BoxFit.cover,
+                                            height: 100,
+                                            width: 100,
+                                          ),
+                                        )),
+                                      ),
+                                    ),
+                                    /* GridTile(
+                                        child: Image.network(
+                                      _currentDbImage[index].blobUrl,
+                                      fit: BoxFit.cover,
+                                      height: 120,
+                                      width: 90,
+                                    )),*/
+                                  );
+                          }),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: IconButton(
+                            onPressed: () {
+                              showAlertDialogMedia();
+                              //  _CaptureImage();
+                              // _pickImage();
+                            },
+                            icon: Icon(
+                              Icons.add_a_photo,
+                              size: 40,
+                            )),
+                      ),
+                      Center(
+                        child: DragAndDropGridView(
+                          controller: _scrollController,
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 3,
+                            childAspectRatio: 3 / 4.5,
+                          ),
+                          padding: EdgeInsets.all(20),
+                          itemBuilder: (context, index) => Card(
+                            elevation: 2,
+                            child: LayoutBuilder(builder: (context, costrains) {
+                              if (variableSet == 0) {
+                                height = costrains.maxHeight;
+                                width = costrains.maxWidth;
+                                variableSet++;
+                              }
+
+                              if (_imageFileList!.length > 0) {
+                                _saveImageVisible = true;
+                              }
+
+                              return Stack(children: <Widget>[
+                                GridTile(
+                                  child: Image.file(
+                                    File(_imageFileList![index].path),
+                                    fit: BoxFit.cover,
+                                    height: height,
+                                    width: width,
+                                  ),
+                                ),
+                                Positioned(
+                                  top: 0,
+                                  right: 0,
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      if (_imageFileList!.length < 1) {
+                                        _saveImageVisible = true;
+                                      }
+                                      _imageFileList?.removeAt(index);
+                                    },
+                                    child: Icon(
+                                      Icons.delete,
+                                      color: Colors.red,
+                                      size: 30,
                                     ),
                                   ),
-                                  /* GridTile(
-                                      child: Image.network(
-                                    _currentDbImage[index].blobUrl,
-                                    fit: BoxFit.cover,
-                                    height: 120,
-                                    width: 90,
-                                  )),*/
-                                );
-                        }),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: IconButton(
-                          onPressed: () {
-                            showAlertDialogMedia();
-                            //  _CaptureImage();
-                            // _pickImage();
+                                ),
+                              ]);
+                            }),
+                          ),
+                          itemCount: _imageFileList!.length,
+                          onWillAccept: (oldIndex, newIndex) => true,
+                          onReorder: (oldIndex, newIndex) {
+                            // You can also implement on your own logic on reorderable
+
+                            int indexOfFirstItem = _imageFileList!
+                                .indexOf(_imageFileList![oldIndex]);
+                            int indexOfSecondItem = _imageFileList!
+                                .indexOf(_imageFileList![newIndex]);
+
+                            if (indexOfFirstItem > indexOfSecondItem) {
+                              for (int i = _imageFileList!
+                                      .indexOf(_imageFileList![oldIndex]);
+                                  i >
+                                      _imageFileList!
+                                          .indexOf(_imageFileList![newIndex]);
+                                  i--) {
+                                var tmp = _imageFileList![i - 1];
+                                _imageFileList![i - 1] = _imageFileList![i];
+                                _imageFileList![i] = tmp;
+                              }
+                            } else {
+                              for (int i = _imageFileList!
+                                      .indexOf(_imageFileList![oldIndex]);
+                                  i <
+                                      _imageFileList!
+                                          .indexOf(_imageFileList![newIndex]);
+                                  i++) {
+                                var tmp = _imageFileList![i + 1];
+                                _imageFileList![i + 1] = _imageFileList![i];
+                                _imageFileList![i] = tmp;
+                              }
+                            }
+                            //    setState(() {});
                           },
-                          icon: Icon(
-                            Icons.add_a_photo,
-                            size: 40,
-                          )),
-                    ),
-                    Center(
-                      child: DragAndDropGridView(
-                        controller: _scrollController,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 3,
-                          childAspectRatio: 3 / 4.5,
                         ),
-                        padding: EdgeInsets.all(20),
-                        itemBuilder: (context, index) => Card(
-                          elevation: 2,
-                          child: LayoutBuilder(builder: (context, costrains) {
-                            if (variableSet == 0) {
-                              height = costrains.maxHeight;
-                              width = costrains.maxWidth;
-                              variableSet++;
-                            }
-
-                            if (_imageFileList!.length > 0) {
-                              _saveImageVisible = true;
-                            }
-
-                            return Stack(children: <Widget>[
-                              GridTile(
-                                child: Image.file(
-                                  File(_imageFileList![index].path),
-                                  fit: BoxFit.cover,
-                                  height: height,
-                                  width: width,
-                                ),
-                              ),
-                              Positioned(
-                                top: 0,
-                                right: 0,
-                                child: GestureDetector(
-                                  onTap: () {
-                                    if (_imageFileList!.length < 1) {
-                                      _saveImageVisible = true;
-                                    }
-                                    _imageFileList?.removeAt(index);
-                                  },
-                                  child: Icon(
-                                    Icons.delete,
-                                    color: Colors.red,
-                                    size: 30,
-                                  ),
-                                ),
-                              ),
-                            ]);
-                          }),
-                        ),
-                        itemCount: _imageFileList!.length,
-                        onWillAccept: (oldIndex, newIndex) => true,
-                        onReorder: (oldIndex, newIndex) {
-                          // You can also implement on your own logic on reorderable
-
-                          int indexOfFirstItem = _imageFileList!
-                              .indexOf(_imageFileList![oldIndex]);
-                          int indexOfSecondItem = _imageFileList!
-                              .indexOf(_imageFileList![newIndex]);
-
-                          if (indexOfFirstItem > indexOfSecondItem) {
-                            for (int i = _imageFileList!
-                                    .indexOf(_imageFileList![oldIndex]);
-                                i >
-                                    _imageFileList!
-                                        .indexOf(_imageFileList![newIndex]);
-                                i--) {
-                              var tmp = _imageFileList![i - 1];
-                              _imageFileList![i - 1] = _imageFileList![i];
-                              _imageFileList![i] = tmp;
-                            }
-                          } else {
-                            for (int i = _imageFileList!
-                                    .indexOf(_imageFileList![oldIndex]);
-                                i <
-                                    _imageFileList!
-                                        .indexOf(_imageFileList![newIndex]);
-                                i++) {
-                              var tmp = _imageFileList![i + 1];
-                              _imageFileList![i + 1] = _imageFileList![i];
-                              _imageFileList![i] = tmp;
-                            }
-                          }
-                          //    setState(() {});
-                        },
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),

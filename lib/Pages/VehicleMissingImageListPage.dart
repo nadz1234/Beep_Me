@@ -19,7 +19,7 @@ class MissingImageListPage extends StatefulWidget {
 
 class _MissingImageListPageState extends State<MissingImageListPage> {
   String data = '';
-  var vehicleListLength;
+  List vehicleListLength = [];
   int? client = 0;
   int numVeh = 0;
   @override
@@ -65,6 +65,7 @@ class _MissingImageListPageState extends State<MissingImageListPage> {
 
   @override
   Widget build(BuildContext context) {
+    final query = MediaQuery.of(context);
     numVeh = widget.numVehicles;
     getSharedPrefValues();
     return Scaffold(
@@ -74,129 +75,152 @@ class _MissingImageListPageState extends State<MissingImageListPage> {
         backgroundColor: componentColor,
       ),
       body: ListView(children: <Widget>[
-        Container(
-          height: 100,
-          child: Center(
-            child: Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Text(
-                'These vehicles have less than $numVeh photos, being the minimum prescribed for your business. Click on the vehicle to add photos.',
-                style: TextStyle(color: Colors.white, fontSize: 16),
+        MediaQuery(
+          data: query.copyWith(textScaleFactor: 1.25),
+          child: Container(
+            height: 100,
+            child: Center(
+              child: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text(
+                  'These vehicles have less than $numVeh photos, being the minimum prescribed for your business. Click on the vehicle to add photos.',
+                  style: TextStyle(color: Colors.white, fontSize: 16),
+                ),
               ),
             ),
           ),
         ),
-        ListView.builder(
-            physics: ScrollPhysics(),
-            shrinkWrap: true,
-            scrollDirection: Axis.vertical,
-            itemCount: vehicleListLength == null ? 0 : vehicleListLength.length,
-            itemBuilder: (BuildContext context, int index) {
-              String img = jsonDecode(data)['result'][index]['image'];
-
-              var vehicleSpecId =
-                  jsonDecode(data)['result'][index]['vehicleStockID'];
-
-              var imgCount = jsonDecode(data)['result'][index]['imageCount'];
-              var imgRequired =
-                  jsonDecode(data)['result'][index]['imageRequired'];
-              var totalimages = imgRequired + imgCount;
-
-              int numberPhotosLeft = 0;
-              numberPhotosLeft = totalimages - imgCount;
-
-              return Container(
-                height: 130,
-                width: MediaQuery.of(context).size.width,
-                child: Padding(
-                  padding: const EdgeInsets.all(4.0),
-                  child: Card(
-                    child: InkWell(
-                      onTap: () async {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => (VehicleImageOptions(
-                                    vehicleSpecId,
-                                    totalimages,
-                                    imgRequired,
-                                    imgCount,
-                                    widget.numVehicles))));
-                      },
-                      child: Container(
-                          child: Row(
-                        children: <Widget>[
-                          Image.network(
-                            img,
-                            fit: BoxFit.cover,
-                            width: 100,
-                            height: 450,
-                            alignment: Alignment.center,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Container(
-                                  width: 250,
-                                  child: Text(
-                                    jsonDecode(data)['result'][index]
-                                        ['friendlyName'],
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: componentColor),
-                                  ),
-                                ),
-                                Row(
-                                  children: [
-                                    const Padding(
-                                      padding: EdgeInsets.fromLTRB(2, 2, 0, 0),
-                                      child: Text('Photos '),
-                                    ),
-                                    Padding(
-                                      padding:
-                                          const EdgeInsets.fromLTRB(2, 2, 0, 0),
-                                      child: Text(
-                                        imgCount.toString() +
-                                            ' Need ' +
-                                            numberPhotosLeft.toString(),
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Text('Stock # '),
-                                    Padding(
-                                      padding:
-                                          const EdgeInsets.fromLTRB(3, 0, 0, 0),
-                                      child: Text(
-                                        vehicleSpecId.toString(),
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          )
-                        ],
-                      )),
+        vehicleListLength.length == 0
+            ? Container(
+                child: Center(
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const <Widget>[
+                    CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                          Color.fromARGB(255, 31, 134, 112)),
+                      backgroundColor: Colors.grey,
                     ),
-                    color: cardColor,
-                    elevation: 7.0,
-                  ),
-                ),
-              );
-            }),
+                  ])))
+            : ListView.builder(
+                physics: ScrollPhysics(),
+                shrinkWrap: true,
+                scrollDirection: Axis.vertical,
+                itemCount:
+                    vehicleListLength == null ? 0 : vehicleListLength.length,
+                itemBuilder: (BuildContext context, int index) {
+                  String img = jsonDecode(data)['result'][index]['image'];
+
+                  var vehicleSpecId =
+                      jsonDecode(data)['result'][index]['vehicleStockID'];
+
+                  var imgCount =
+                      jsonDecode(data)['result'][index]['imageCount'];
+                  var imgRequired =
+                      jsonDecode(data)['result'][index]['imageRequired'];
+                  var totalimages = imgRequired + imgCount;
+
+                  int numberPhotosLeft = 0;
+                  numberPhotosLeft = totalimages - imgCount;
+
+                  return MediaQuery(
+                    data: query.copyWith(textScaleFactor: 1.25),
+                    child: Container(
+                      height: 130,
+                      width: MediaQuery.of(context).size.width,
+                      child: Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: Card(
+                          child: InkWell(
+                            onTap: () async {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          (VehicleImageOptions(
+                                              vehicleSpecId,
+                                              totalimages,
+                                              imgRequired,
+                                              imgCount,
+                                              widget.numVehicles))));
+                            },
+                            child: Container(
+                                child: Row(
+                              children: <Widget>[
+                                Image.network(
+                                  img,
+                                  fit: BoxFit.cover,
+                                  width: 100,
+                                  height: 450,
+                                  alignment: Alignment.center,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Container(
+                                        width: 250,
+                                        child: Text(
+                                          jsonDecode(data)['result'][index]
+                                              ['friendlyName'],
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: componentColor),
+                                        ),
+                                      ),
+                                      Row(
+                                        children: [
+                                          const Padding(
+                                            padding:
+                                                EdgeInsets.fromLTRB(2, 2, 0, 0),
+                                            child: Text('Photos '),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.fromLTRB(
+                                                2, 2, 0, 0),
+                                            child: Text(
+                                              imgCount.toString() +
+                                                  ' Need ' +
+                                                  numberPhotosLeft.toString(),
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text('Stock # '),
+                                          Padding(
+                                            padding: const EdgeInsets.fromLTRB(
+                                                3, 0, 0, 0),
+                                            child: Text(
+                                              vehicleSpecId.toString(),
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            )),
+                          ),
+                          color: cardColor,
+                          elevation: 7.0,
+                        ),
+                      ),
+                    ),
+                  );
+                }),
       ]),
     );
   }

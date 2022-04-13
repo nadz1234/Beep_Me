@@ -4,6 +4,7 @@ import 'dart:ui';
 
 import 'package:beep_me_ix/Components/colorConstants.dart';
 import 'package:beep_me_ix/Models/CurrentImage.dart';
+import 'package:beep_me_ix/Pages/VehicleMissingImageListPage.dart';
 import 'package:beep_me_ix/Pages/home_page.dart';
 import 'package:beep_me_ix/Widgets/loadingIndicator.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +25,9 @@ import '../data/baseApi.dart';
 
 class OrderImagePriority extends StatefulWidget {
   int vehicleId;
-  OrderImagePriority(this.vehicleId);
+  int numVehicles;
+
+  OrderImagePriority(this.vehicleId, this.numVehicles);
 
   @override
   State<OrderImagePriority> createState() => _OrderImagePriorityState();
@@ -100,7 +103,8 @@ class _OrderImagePriorityState extends State<OrderImagePriority> {
                         Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => (HomePage())));
+                                builder: (context) => (MissingImageListPage(
+                                    widget.numVehicles))));
                       },
                       child: Text('Okay')),
                 ],

@@ -340,15 +340,15 @@ class _LoginPageState extends State<LoginPage> {
                       onPressed: () async {
                         SharedPreferences sharedPreferences =
                             await SharedPreferences.getInstance();
-                        // signIn();
-                        //  signInWithGoogle();
-                        /*  _googleLoginPressed(context);
+                        signIn();
+                        signInWithGoogle();
+                        _googleLoginPressed(context);
                         Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => HomePage()));*/
+                                builder: (context) => HomePage()));
 
-                        _googleSignIn.signIn().then((userDetails) {
+                        /* _googleSignIn.signIn().then((userDetails) {
                           setState(() {
                             _userObj = userDetails!;
                             _userObj.authentication.then((googleValue) {
@@ -362,7 +362,7 @@ class _LoginPageState extends State<LoginPage> {
                                 MaterialPageRoute(
                                     builder: (context) => HomePage()));
                           });
-                        });
+                        });*/
                       },
                       child: const Text(
                         'Login with Google',

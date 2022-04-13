@@ -146,7 +146,7 @@ class _ImpersonState extends State<Imperson> {
                           child: ListTile(
                             title: Text(
                               impersonates.text,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: Color.fromARGB(255, 14, 226, 191),
                                   fontWeight: FontWeight.bold),
                             ),
@@ -177,7 +177,7 @@ class _ImpersonState extends State<Imperson> {
                           child: ListTile(
                             title: Text(
                               impersonates.text,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: Color.fromARGB(255, 14, 226, 191),
                                   fontWeight: FontWeight.bold),
                             ),
